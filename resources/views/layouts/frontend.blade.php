@@ -20,28 +20,28 @@
     <link href="{{asset('assets/css/meanmenu.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/owl.carousel.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/lightbox.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/inc/custom-slider/css/nivo-slider.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/inc/custom-slider/css/preview.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/style.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/nivo-slider.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/preview.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/responsive.css')}}" rel="stylesheet">
     <link href="{{asset('assets/js/modernizr-2.8.3.min.js')}}" rel="stylesheet">
 </head>
 
 <body class="home">
 <!--Preloader area Start here-->
-<div class="preloader">
-    <div class="sk-cube-grid">
-        <div class="sk-cube sk-cube1"></div>
-        <div class="sk-cube sk-cube2"></div>
-        <div class="sk-cube sk-cube3"></div>
-        <div class="sk-cube sk-cube4"></div>
-        <div class="sk-cube sk-cube5"></div>
-        <div class="sk-cube sk-cube6"></div>
-        <div class="sk-cube sk-cube7"></div>
-        <div class="sk-cube sk-cube8"></div>
-        <div class="sk-cube sk-cube9"></div>
-    </div>
-</div>
+{{--<div class="preloader">--}}
+    {{--<div class="sk-cube-grid">--}}
+        {{--<div class="sk-cube sk-cube1"></div>--}}
+        {{--<div class="sk-cube sk-cube2"></div>--}}
+        {{--<div class="sk-cube sk-cube3"></div>--}}
+        {{--<div class="sk-cube sk-cube4"></div>--}}
+        {{--<div class="sk-cube sk-cube5"></div>--}}
+        {{--<div class="sk-cube sk-cube6"></div>--}}
+        {{--<div class="sk-cube sk-cube7"></div>--}}
+        {{--<div class="sk-cube sk-cube8"></div>--}}
+        {{--<div class="sk-cube sk-cube9"></div>--}}
+    {{--</div>--}}
+{{--</div>--}}
 <!--Preloader area end here-->
 
 <!--Header area start here-->
@@ -365,8 +365,8 @@
 <script src="{{asset('assets/js/jquery.magnific-popup.js')}}"></script>
 <script src="{{asset('assets/js/waypoints.min.js')}}"></script>
 <script src="{{asset('assets/js/lightbox.min.js')}}"></script>
-<script src="{{asset('assets/inc/custom-slider/js/jquery.nivo.slider.js')}}"></script>
-<script src="{{asset('assets/inc/custom-slider/home.js')}}"></script>
+<script src="{{asset('assets/js/jquery.nivo.slider.js')}}"></script>
+<script src="{{asset('assets/js/home.js')}}"></script>
 <script src="{{asset('assets/js/main.js')}}"></script>
 
 </body>

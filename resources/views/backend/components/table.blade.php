@@ -55,7 +55,7 @@
     <script>
         $(document).ready(function() {
             @if(session(str_slug($title,'-')))
-                swal("Good job!", "{{session(str_slug($title,'-'))}}", "success");
+            swal("Good job!", "{{session(str_slug($title,'-'))}}", "success");
             @endif
             $('.js-basic-example').DataTable({
                 responsive: true,
@@ -66,14 +66,17 @@
             $('.statusCheckBox').on('change',function () {
                 var _this = $(this);
                 var status = (_this.context.checked) ? 1 : 0;
+                var id = _this.data('row');
                 var data = {
                     'table' : "{{$table}}",
-                    'status' : status
+                    'status' : status,
+                    'id' : id
                 };
                 $.post("{{route('setStatus')}}",data,function (result) {
                     swal("Good job!", result, "success");
                 });
             });
         } );
+
     </script>
 @endpush

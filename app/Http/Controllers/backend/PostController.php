@@ -65,6 +65,7 @@ class PostController extends Controller
 //
 //        }
         $request->merge(['count' => 0]);
+        $request->merge(['status' => 0]);
         $request->merge(['user_id' => Auth::id()]);
         $request->merge(['slug' => str_slug($request->title,'-')]);
         $request->session()->flash(str_slug('Create post','-'),'Post created');
@@ -107,12 +108,10 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $settings = $this->getSettingsForForm();
-        $users= User::all();
         $categories = Category::all();
-        $imagess = Image::all();
         $tags = Tag::all();
         $settings['title'] = 'Edit post';
-        return view('backend.post.edit',compact('post','settings','tags','categories','imagess','users'));
+        return view('backend.post.edit',compact('post','settings','tags','categories'));
     }
 
     /**
@@ -122,23 +121,21 @@ class PostController extends Controller
      * @param  \App\Models\Post $post
      * @return void
      */
-    public function update(PostRequest $request, Post $post)
+    public function update(Request $request, Post $post)
     {
-        if ($request->hasFile('photo'))
-        {
-            (file_exists(public_path('post/'.$post->image)) ? unlink(public_path('post/'.$post->image)) : null);
-            (file_exists(public_path('post/thumbnail-'.$post->image)) ? unlink(public_path('post/thumbnail-'.$post->image)) : null);
-            $image = Image::make($request->file('photo'));
-            $orginalImageName = str_slug($request->title,'-').'.'.$request->file('photo')->getClientOriginalExtension();
-            $tumbnailImageName = "thumbnail-".str_slug($request->title,'-').'.'.$request->file('photo')->getClientOriginalExtension();
-            $image->save(public_path('post/'.$orginalImageName));
-            $image->resize(600, null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-            $image->save(public_path('post/'.$tumbnailImageName));
-            $request->merge(['image' => $orginalImageName]);
+        $files = $request->file('photo');
+        if ($request->hasFile('photo')){
+            foreach ($files as $file) {
+                $name = rand(). "." . $file->getClientOriginalExtension();
+                $file->move(public_path('posts'), $name);
+                $image = new Image();
+                $image->post_id =$post->id;
+                $image->photo = $name;
+                $image->save();
+            }
         }
-
+        $request->merge(['count' => 0]);
+        $request->merge(['status' => 0]);
         $request->merge(['slug' => str_slug($request->title,'-')]);
         $post->update($request->all());
         $post->tags()->sync($request->tags);
@@ -154,8 +151,12 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        $post->session()->flash(str_slug('posts','-'),'Post Deleted');
+        return redirect('/s');
     }
+
+
     /**
      *  Return setting array for table component
      * @return array

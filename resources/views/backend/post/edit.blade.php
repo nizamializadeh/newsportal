@@ -1,24 +1,37 @@
 @component('backend.components.form',$settings)
     {{-- Component content--}}
+    @foreach($post->images as $image)
+
+        <div class="col-sm-6">
+            <div class="form-group form-float">
+                    <div class="col-sm-6" style="height:90px">
+                    <img class="img-responsive thumbnail post-img-preview" src="{{asset('posts/'.$image->photo)}}">
+                    </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+                        <form action="{{route('image.destroy',['image' => $image->id])}}" method="post">
+                            {{ method_field('delete') }}
+                            @csrf
+                            <button type="submit" class="btn bg-red btn-circle waves-effect waves-circle waves-float">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
     <form id="form_validation" action="{{route('post.update',['post' => $post->id])}}" method="post" enctype="multipart/form-data">
         @csrf
         {{method_field('PUT')}}
         <div class="row clearfix">
-            @foreach($post->images as $image)
-                <div class="col-sm-6">
-                    <div class="form-group form-float">
-                        <div class="form-line">
-                            <label for="postImage" style="cursor: pointer">
-                                <img class="img-responsive thumbnail post-img-preview" src="{{asset('posts/'.$image->photo)}}">
-                                <input name="photo[]" type="file" required class="form-control  " id="postImage" multiple>
 
-                            </label>
-                        </div>
+            <div class="col-sm-6">
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <input name="photo[]" type="file"  class="form-control  post-image" id="postImage" multiple>
                     </div>
                 </div>
-
-            @endforeach
-
+            </div>
             <div class="col-sm-6">
                 <div class="form-group form-float">
                     <div class="form-line">
@@ -48,17 +61,6 @@
                     <div class="form-line">
                         <input name="que" type="text" required class="form-control" value="{{$post->que}}">
                         <label class="form-label">Number</label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="input-group ">
-                    <div class="form-line">
-                        <select name="author_id" class=" show-tick" data-live-search="true">
-                            @foreach($users as $user)
-                                <option {{($post->user->id == $user->id) ? "checked" : ""}} value="{{$user->id}}">{{$user->name}}</option>
-                            @endforeach
-                        </select>
                     </div>
                 </div>
             </div>

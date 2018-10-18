@@ -11,7 +11,7 @@
             <td>{{$post->count}}</td>
             <td>
                 <div class="switch">
-                    <label><input class="statusCheckBox" type="checkbox" {{($post->status) ? 'checked' : ""}}><span class="lever"></span></label>
+                    <label><input class="statusCheckBox" data-row="{{$post->id}}" type="checkbox" {{($post->status) ? 'checked' : ""}}><span class="lever"></span></label>
                 </div>
             </td>
             <td>

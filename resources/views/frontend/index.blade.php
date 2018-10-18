@@ -12,7 +12,7 @@
                             <div class="tickers col-md-10">
                                 <div id="top-news-slider" class="owl-carousel ">
                                     <div class="item">
-                                        <a href="blog-single.html"> <img src="images/breaking/1.jpg" alt="news image"> <span>Migrants Told: Stay in France </span></a>
+                                        <a href="blog-single.html"> <img src="images/image-gallery/1.jpg" alt="news image"> <span>Migrants Told: Stay in France </span></a>
                                     </div>
                                     <div class="item">
                                         <a href="blog-single.html"><img src="images/breaking/2.jpg" alt="news image"> <span>Duo Scripta An The Prieirmod</span></a>
@@ -43,55 +43,37 @@
                 <div class="slider-area">
                     <div class="bend niceties preview-2">
                         <div id="ensign-nivoslider" class="slides">
-                            <img src="images/slider/slide_1.jpg" alt="" title="#slider-direction-1" />
-                            <img src="images/slider/slide_3.jpg" alt="" title="#slider-direction-2" />
+;                            @if(isset($posts[0]))
+                                @foreach($posts[0]  as $post)
+
+                                    <img style="height: 538px" src="{{asset('posts/'.$post->images[0]->photo)}}" alt="" title="#{{$post->id}}" />
+                                @endforeach
+                            @endif
                         </div>
                         <!-- direction 2 -->
-                        <div id="slider-direction-1" class="slider-direction">
-                            <div class="slider-content t-cn s-tb slider-1">
-                                <div class="title-container s-tb-c">
-                                    <div class="slider-botton">
-                                        <ul>
-                                            <li>
-                                                <a class="cat-link" href="category.html">Business</a>
-                                                <span class="date">
-                                                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>November 28, 2017
-                                                </span>
-                                                <span class="comment">
-                                                    <a href="index.html#"><i class="fa fa-comment-o" aria-hidden="true"></i> 50
-                                                    </a>
-                                                </span>
-                                            </li>
-                                        </ul>
+                        @if(isset($posts[0]))
+                            @foreach($posts[0]  as $post)
+                            <div id="{{$post->id}}" class="slider-direction">
+                                <div class="slider-content t-cn s-tb slider-1">
+                                    <div class="title-container s-tb-c">
+                                        <div class="slider-botton">
+                                            <ul>
+                                                <li>
+                                                    <a class="cat-link" href="category.html">Business</a>
+                                                    <span class="date">
+                                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>{{date('j M Y', strtotime($post->created_at))}}
+                                                    </span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <h1 class="title1"><a href="blog.html">{{$post->title}}</a></h1>
+                                        <div class="title2">{{$post->title}}</div>
                                     </div>
-                                    <h1 class="title1"><a href="blog.html"><span>Record</span> proportion of women<br/>on degrees</a></h1>
-                                    <div class="title2">The exhibition Banksy doesn’t want to see whle travelling hear.</div>
                                 </div>
                             </div>
-                        </div>
+                            @endforeach
+                        @endif
                         <!-- direction 2 -->
-                        <div id="slider-direction-2" class="slider-direction">
-                            <div class="slider-content t-cn s-tb slider-2">
-                                <div class="title-container s-tb-c">
-                                    <div class="slider-botton">
-                                        <ul>
-                                            <li>
-                                                <a class="cat-link" href="category-world.html">World</a>
-                                                <span class="date">
-                                                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>November 28, 2017
-                                                </span>
-                                                <span class="comment">
-                                                    <a href="index.html#"><i class="fa fa-comment-o" aria-hidden="true"></i> 50
-                                                    </a>
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <h1 class="title1"><a href="blog.html"><span>John</span> to retire as director</a></h1>
-                                    <div class="title2">The exhibition Banksy doesn’t want to see whle travelling hear.</div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -99,30 +81,18 @@
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 paddimg-left-none">
                 <div class="slider-right">
                     <ul>
-                        <li>
-                            <div class="right-content">
-                                <span class="category"><a class="cat-link" href="blog.html">Business</a></span>
-                                <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true"> </i> June  28,  2017</span>
-                                <h3><a href="blog-single.html">Trudeau forced to refugees.</a></h3>
-                            </div>
-                            <div class="right-image"><a href="blog-single.html"><img src="images/sidebar-images/1.jpg" alt="sidebar image"></a></div>
-                        </li>
-                        <li>
-                            <div class="right-content">
-                                <span class="category"><a class="cat-link" href="blog.html">Health</a></span>
-                                <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true"> </i>June  28,  2017 </span>
-                                <h3><a href="blog-single.html">The exhibition Bankasy</a></h3>
-                            </div>
-                            <div class="right-image"><a href="blog-single.html"><img src="images/sidebar-images/2.jpg" alt="sidebar image"></a></div>
-                        </li>
-                        <li>
-                            <div class="right-content">
-                                <span class="category"><a class="cat-link" href="blog.html">Science</a></span>
-                                <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true"> </i> June  28,  2017 </span>
-                                <h3><a href="blog-single.html">Hurricane Harvey: evacuations.</a></h3>
-                            </div>
-                            <div class="right-image"><a href="blog-single.html"><img src="images/sidebar-images/3.jpg" alt="sidebar image"></a></div>
-                        </li>
+                        @if(isset($posts[1]))
+                            @foreach($posts[1]  as $post)
+                            <li style="height: 178px">
+                                <div class="right-content">
+                                    <span class="category"><a class="cat-link" href="blog.html">Business</a></span>
+                                    <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true">{{date('j M Y', strtotime($post->created_at))}} </i> </span>
+                                    <h3><a href="blog-single.html">{{$post->title}}</a></h3>
+                                </div>
+                                    <div class="right-image"><a href="blog-single.html"><img class="img-responsive thumbnail post-img-preview" src="{{asset('posts/'.$post->images[0]->photo)}}"></a></div>
+                            </li>
+                          @endforeach
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -130,6 +100,8 @@
     </div>
     <!-- Slider Section end Here -->
     <!-- All News Section Start Here -->
+
+
     <div class="all-news-area">
         <div class="container">
             <!-- latest news Start Here -->
@@ -436,13 +408,12 @@
                                     <a href="index.html#">View More <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                                 </div>
                             </div>
-
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 <div class="list-col">
                                     <a href="blog-single.html"> <img src="images/Trending/1.jpg" alt="" title="Trending image" /></a>
                                     <div class="dsc">
                                         <span class="date"> <i class="fa fa-calendar-check-o" aria-hidden="true"></i> November 28, 2017 </span> <span class="comment"><a href="index.html#"><i class="fa fa-comment-o" aria-hidden="true"></i> 50</a></span>
-                                        <h3><a href="blog-single.html">Two Loser Idaho Pot Smugglers Freak Out, Call 911 on Themselves </a></h3>
+                                        <h3><a href="blog-single.html">titlee</a></h3>
                                         <p>Blandit rutrum, erat et egestas ultricies, dolor tortor egestas enim, quiste rhoncus sem the purus eu sapien curabitur.</p>
                                     </div>
                                 </div>
@@ -467,6 +438,7 @@
                                         </div>
                                     </li>
                                     <li>
+
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content">
                                                 <div class="item-post">

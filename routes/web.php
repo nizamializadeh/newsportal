@@ -19,13 +19,20 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('dashboard','backend\AdminController@dashboard')->name('dashboard');
 Route::post('set-status','backend\AdminController@setStatus')->name('setStatus');
 
 Route::get('/admin/login', 'backend\AdminController@login')->name('adminLogin');
 Route::post('/admin/login', 'backend\AdminController@postLogin')->name('postAdminLogin');
 
+Route::get('/s','frontend\SiteController@index')->name('site');
+Route::get('/abouts','frontend\SiteController@about')->name('about');
+Route::get('/testimonail','frontend\SiteController@testimonail')->name('testimonail');
+Route::get('/contact','frontend\SiteController@contact')->name('contact');
+Route::post('/contactus','frontend\SiteController@contactus')->name('contactus');
+
 Route::group(['middleware' => 'admin','prefix' => 'admin'],function (){
+    Route::get('dashboard','backend\AdminController@dashboard')->name('dashboard');
+    Route::get('contact-us','backend\AdminController@contactus')->name('contactus');
 
     Route::resources([
 
@@ -37,14 +44,15 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'],function (){
         'tag' => 'backend\TagController',
         'testimonail' => 'backend\TestimonailsController',
         'user' => 'backend\UserController',
+        'image' => 'backend\ImageController',
 
     ]);
 });
+
 Route::resources([
-
-
     'post' => 'backend\PostController',
-
-
 ]);
+Route::get('/profil/edit','backend\UserController@edit')->name('edit');
+Route::post('/profil/update','backend\UserController@update')->name('update');
+
 
