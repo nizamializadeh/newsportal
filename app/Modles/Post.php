@@ -8,7 +8,8 @@ class Post extends Model
 {
     protected $fillable = [
         'title','image','text','slug','count',
-        'video','keyword','que','category_id','time','user_id','status'
+        'video','keyword','category_id','user_id',
+        'status','trend','head','break','feature',
     ];
     public function tags()
     {
@@ -19,5 +20,8 @@ class Post extends Model
     }
     public function user(){
         return $this->belongsTo('App\User');
+    }
+    public function category(){
+        return $this->belongsTo('App\Modles\Category');
     }
 }

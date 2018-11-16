@@ -5,36 +5,25 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-0">
                 <div class="wrapper">
                     <!-- News Slider -->
+
                     <div class="ticker marg-botm">
+                        @if(!$breaks->count()==0)
                         <div class="ticker-wrap">
                             <!-- News Slider Title -->
                             <div class="ticker-head up-case backg-colr col-md-2">Breaking News <i class="fa fa-angle-double-right" aria-hidden="true"></i></div>
                             <div class="tickers col-md-10">
                                 <div id="top-news-slider" class="owl-carousel ">
+                                    @foreach($breaks as $break)
                                     <div class="item">
-                                        <a href="blog-single.html"> <img src="images/image-gallery/1.jpg" alt="news image"> <span>Migrants Told: Stay in France </span></a>
+                                    <a href="blog-single.html"> <img src="{{asset('posts/'.$break->images[0]->photo)}}" alt="news image"> <span>{{$break->title}}</span></a>
                                     </div>
-                                    <div class="item">
-                                        <a href="blog-single.html"><img src="images/breaking/2.jpg" alt="news image"> <span>Duo Scripta An The Prieirmod</span></a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="blog-single.html"><img src="images/breaking/3.jpg" alt="news image"> <span>Two Loser Idaho Pot Smugglers </span></a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="blog-single.html"><img src="images/breaking/4.jpg" alt="news image"> <span>Car racer gives herself a mid-Event</span></a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="blog-single.html"><img src="images/breaking/5.jpg" alt="news image"> <span>Aaron Rodgers Criticizes </span></a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="blog-single.html"> <img src="images/breaking/1.jpg" alt="news image"> <span>Detroit Natives Wary & Recovery</span></a>
-                                    </div>
-                                    <div class="item">
-                                        <a href="blog-single.html"><img src="images/breaking/4.jpg" alt="news image"> <span>Clinton campaign jilted as FBI</span></a>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
+
+                        @endif
+
                     </div>
                     <!-- End News Slider -->
                 </div>
@@ -43,31 +32,31 @@
                 <div class="slider-area">
                     <div class="bend niceties preview-2">
                         <div id="ensign-nivoslider" class="slides">
-;                            @if(isset($posts[0]))
-                                @foreach($posts[0]  as $post)
+                           @if(isset($heads[1]))
+                                @foreach($heads[1]  as $head)
 
-                                    <img style="height: 538px" src="{{asset('posts/'.$post->images[0]->photo)}}" alt="" title="#{{$post->id}}" />
+                                    <img style="height: 538px" src="{{asset('posts/'.$head->images[0]->photo)}}" alt="" title="#{{$head->id}}" />
                                 @endforeach
                             @endif
                         </div>
                         <!-- direction 2 -->
-                        @if(isset($posts[0]))
-                            @foreach($posts[0]  as $post)
-                            <div id="{{$post->id}}" class="slider-direction">
+                        @if(isset($heads[1]))
+                            @foreach($heads[1]  as $head)
+                            <div id="{{$head->id}}" class="slider-direction">
                                 <div class="slider-content t-cn s-tb slider-1">
                                     <div class="title-container s-tb-c">
                                         <div class="slider-botton">
                                             <ul>
                                                 <li>
-                                                    <a class="cat-link" href="category.html">Business</a>
+                                                    <a class="cat-link" href="category.html">{{$head->category->name}}</a>
                                                     <span class="date">
-                                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>{{date('j M Y', strtotime($post->created_at))}}
+                                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i>{{date('j M Y', strtotime($head->created_at))}}
                                                     </span>
                                                 </li>
                                             </ul>
                                         </div>
-                                        <h1 class="title1"><a href="blog.html">{{$post->title}}</a></h1>
-                                        <div class="title2">{{$post->title}}</div>
+                                        <h1 class="title1"><a href="blog.html">{{$head->title}}</a></h1>
+                                        <div class="title2">{{$head->title}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -81,15 +70,15 @@
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 paddimg-left-none">
                 <div class="slider-right">
                     <ul>
-                        @if(isset($posts[1]))
-                            @foreach($posts[1]  as $post)
+                        @if(isset($heads[0]))
+                            @foreach($heads[0]  as $head)
                             <li style="height: 178px">
                                 <div class="right-content">
-                                    <span class="category"><a class="cat-link" href="blog.html">Business</a></span>
-                                    <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true">{{date('j M Y', strtotime($post->created_at))}} </i> </span>
-                                    <h3><a href="blog-single.html">{{$post->title}}</a></h3>
+                                    <span class="category"><a class="cat-link" href="blog.html">{{$head->category->name}}</a></span>
+                                    <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true">{{date('j M Y', strtotime($head->created_at))}} </i> </span>
+                                    <h3><a href="blog-single.html">{{$head->title}}</a></h3>
                                 </div>
-                                    <div class="right-image"><a href="blog-single.html"><img class="img-responsive thumbnail post-img-preview" src="{{asset('posts/'.$post->images[0]->photo)}}"></a></div>
+                                    <div class="right-image"><a href="blog-single.html"><img class="img-responsive thumbnail post-img-preview" src="{{asset('posts/'.$head->images[0]->photo)}}"></a></div>
                             </li>
                           @endforeach
                         @endif
@@ -109,65 +98,49 @@
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 tab-home">
                     <ul class="nav nav-tabs">
                         <li class="title-bg">Latest News</li>
-                        <li class="active"><a data-toggle="tab" href="index.html#tab1">Highest Rated</a></li>
-                        <li><a data-toggle="tab" href="index.html#tab2">Week</a></li>
-                        <li><a data-toggle="tab" href="index.html#tab3">Hot Articals</a></li>
-                        <li><a data-toggle="tab" href="index.html#tab4">Previous</a></li>
                     </ul>
                     <div class="tab-content">
                         <div id="tab1" class="tab-pane fade in active">
                             <div class="tab-top-content">
+                               {{--@if(isset($posts[0]))--}}
+                                {{--@foreach($posts[0]  as $post)--}}
+
+                                {{--<img style="height: 538px" src="{{asset('posts/'.$post->images[0]->photo)}}" alt="" title="#{{$post->id}}" />--}}
+                                {{--@endforeach--}}
+                                {{--@endif--}}
+                                @if(isset($latests[1]))
+                                    @foreach($latests[1]  as $latest)
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 paddimg-right-none">
-                                        <a href="blog-single.html"><img src="images/tab/1.jpg" alt="sidebar image"></a>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 paddimg-right-none" style="height:286px;">
+                                        <a href="blog-single.html"><img style="height: 100%;object-fit: cover;" src="{{asset('posts/'.$latest->images[0]->photo)}}" alt="sidebar image"></a>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 last-col">
-                                        <span class="date"><a href="index.html#"><i class="fa fa-user-o" aria-hidden="true"></i> james Bond </a></span> <span class="comment"><a href="index.html#"><i class="fa fa-comment-o" aria-hidden="true"></i> 50</a></span>
+                                        <span class="date"><a href="index.html#"><i class="fa fa-user-o" aria-hidden="true"></i> james Bond </a></span> <span class="comment"><a href="index.html#"><i class="fa fa-comment-o" aria-hidden="true"></i> {{date('j M Y', strtotime($latest->created_at))}}</a></span>
                                         <h3><a href="index.html#">Migrants Told: Stay in France or go back to your country</a></h3>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nisl risus, tristique diam id, blandit condimentum</p>
                                         <a href="blog-single.html" class="read-more hvr-bounce-to-right">Read More</a>
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
+                            @endif
                             <div class="tab-bottom-content">
                                 <div class="row">
+                                    @if(isset($latests[0]))
+                                        @foreach($latests[0]  as $latest)
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 tab-area">
                                         <div class="col-sm-12 col-xs-3 img-tab">
-                                            <a href="blog-single.html"><img src="images/tab/2.jpg" alt="News image"></a>
+                                            <a href="blog-single.html"><img src="{{asset('posts/'.$latest->images[0]->photo)}}" alt="News image"></a>
                                         </div>
                                         <div class="col-sm-12 col-xs-9 img-content">
-                                            <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true"> </i>June 28, 2017</span>
-                                            <h4><a href="blog-single.html">The Soccer Field Close.</a></h4>
+                                            <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true"> </i>{{date('j M Y', strtotime($latest->created_at))}}</span>
+                                            <h4><a href="blog-single.html">{{$latest->title}}</a></h4>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 tab-area">
-                                        <div class="col-sm-12 col-xs-3 img-tab">
-                                            <a href="blog-single.html"><img src="images/tab/3.jpg" alt="News image"></a>
-                                        </div>
-                                        <div class="col-sm-12 col-xs-9 img-content">
-                                            <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true"> </i>June 28, 2017</span>
-                                            <h4><a href="blog-single.html">The Soccer Field Close.</a></h4>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 tab-area">
-                                        <div class="col-sm-12 col-xs-3 img-tab">
-                                            <a href="blog-single.html"><img src="images/tab/4.jpg" alt="News image"></a>
-                                        </div>
-                                        <div class="col-sm-12 col-xs-9 img-content">
-                                            <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true"> </i>June 28, 2017</span>
-                                            <h4><a href="blog-single.html">The Soccer Field Close.</a></h4>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 tab-area">
-                                        <div class="col-sm-12 col-xs-3 img-tab">
-                                            <a href="blog-single.html"><img src="images/tab/5.jpg" alt="News image"></a>
-                                        </div>
-                                        <div class="col-sm-12 col-xs-9 img-content">
-                                            <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true"> </i>June 28, 2017</span>
-                                            <h4><a href="blog-single.html">The Soccer Field Close.</a></h4>
-                                        </div>
-                                    </div>
+                                        @endforeach
+                                    @endif
                                 </div>
+
                             </div>
                         </div>
                         <div id="tab2" class="tab-pane fade">
@@ -409,17 +382,23 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                @if(isset($trends[1]))
+                                    @foreach($trends[1]  as $trend)
                                 <div class="list-col">
-                                    <a href="blog-single.html"> <img src="images/Trending/1.jpg" alt="" title="Trending image" /></a>
+                                    <a href="blog-single.html"> <img src="{{asset('posts/'.$head->images[0]->photo)}}" alt="" title="Trending image" /></a>
                                     <div class="dsc">
-                                        <span class="date"> <i class="fa fa-calendar-check-o" aria-hidden="true"></i> November 28, 2017 </span> <span class="comment"><a href="index.html#"><i class="fa fa-comment-o" aria-hidden="true"></i> 50</a></span>
-                                        <h3><a href="blog-single.html">titlee</a></h3>
+                                        <span class="date"> <i class="fa fa-calendar-check-o" aria-hidden="true"></i> {{date('j M Y', strtotime($trend->created_at))}}</span> <span class="comment"><a href="index.html#"><i class="fa fa-comment-o" aria-hidden="true"></i> 50</a></span>
+                                        <h3><a href="blog-single.html">{{$trend->title}}</a></h3>
                                         <p>Blandit rutrum, erat et egestas ultricies, dolor tortor egestas enim, quiste rhoncus sem the purus eu sapien curabitur.</p>
                                     </div>
                                 </div>
+                                    @endforeach
+                                    @endif
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                 <ul class="news-post">
+                                    @if(isset($trends[0]))
+                                        @foreach($trends[0]  as $trend)
                                     <li>
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content">
@@ -429,66 +408,16 @@
                                                             <a href="blog-single.html"> <img src="images/Trending/2.jpg" alt="" title="Trending image"></a>
                                                         </div>
                                                         <div class="col-lg-8 col-md-8 col-sm-9 col-xs-9">
-                                                            <h4><a href="blog-single.html">Suspendisse Non Metus Consectetur Nunc </a></h4>
-                                                            <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> June 28, 2017</span>
+                                                            <h4><a href="blog-single.html">{{$trend->title}}</a></h4>
+                                                            <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>{{date('j M Y', strtotime($trend->created_at))}}</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
-
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content">
-                                                <div class="item-post">
-                                                    <div class="row">
-                                                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-3 paddimg-right-none">
-                                                            <a href="blog-single.html"> <img src="images/Trending/3.jpg" alt="" title="Trending image"></a>
-                                                        </div>
-                                                        <div class="col-lg-8 col-md-8 col-sm-9 col-xs-9">
-                                                            <h4><a href="blog-single.html">Duo Scripta An The Prieirmod</a></h4>
-                                                            <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> June 28, 2017</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content">
-                                                <div class="item-post">
-                                                    <div class="row">
-                                                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-3 paddimg-right-none">
-                                                            <a href="blog-single.html"> <img src="images/Trending/4.jpg" alt="" title="Trending image"></a>
-                                                        </div>
-                                                        <div class="col-lg-8 col-md-8 col-sm-9 col-xs-9">
-                                                            <h4><a href="blog-single.html">Terrorism Concerns Get UK Tourists </a></h4>
-                                                            <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> June 28, 2017</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="row">
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content">
-                                                <div class="item-post">
-                                                    <div class="row">
-                                                        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-3 paddimg-right-none">
-                                                            <a href="blog-single.html"> <img src="images/Trending/5.jpg" alt="" title="Trending image"></a>
-                                                        </div>
-                                                        <div class="col-lg-8 col-md-8 col-sm-9 col-xs-9">
-                                                            <h4><a href="blog-single.html">Ranking The Royal King Comeback Win </a></h4>
-                                                            <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> June 28, 2017</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                        @endforeach
+                                    @endif
                                 </ul>
                             </div>
                         </div>
@@ -607,97 +536,50 @@
                     <div class="sidebar popular">
                         <h3 class="title-bg">Popular Now</h3>
                         <ul>
+                            @if(isset($populars[1]))
+                                @foreach($populars[1]  as $popular)
                             <li>
-                                <a href="category.html" class="category-btn hvr-bounce-to-right">Business</a>
-                                <div class="post-image"><img src="images/sidebar/1.jpg" alt="News image"></div>
+                                <a href="category.html" class="category-btn hvr-bounce-to-right">{{$popular->category->name}}</a>
+                                <div class="post-image"><img src="{{asset('posts/'.$popular->images[0]->photo)}}" alt="News image"></div>
                                 <div class="content">
                                     <h4>
-                                        <a href="index.html#">The exhibition Bankasy doesn’t want you to see</a>
+                                        <a href="index.html#">{{$popular->title}}</a>
                                     </h4>
                                     <span class="date">
-                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i> November 28, 2017
-                                    </span>
-                                    <span class="comment">
-                                        <a href="index.html#">
-                                            <i class="fa fa-comment-o" aria-hidden="true"></i> 50
-                                        </a>
+                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i> {{date('j M Y', strtotime($trend->created_at))}}
                                     </span>
                                 </div>
                             </li>
+                                @endforeach
+                            @endif
                         </ul>
                     </div>
 
 
                     <div class="hot-news popular-related">
                         <ul class="news-post">
+
+                            @if(isset($populars[0]))
+                                @foreach($populars[0]  as $popular)
                             <li>
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content">
                                         <div class="item-post">
                                             <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-3 paddimg-right-none">
-                                                    <img src="images/popular/1.jpg" alt="" title="News image">
+                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-3 paddimg-right-none" style="height:80px;">
+                                                    <img  style="height: 100%;object-fit: cover;"  src="{{asset('posts/'.$popular->images[0]->photo)}}" alt="" title="News image">
                                                 </div>
                                                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-9">
-                                                    <h4><a href="index.html#"> US should prepare for <br /> Russian election</a></h4>
-                                                    <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> June 28, 2017</span>
+                                                    <h4><a href="index.html#"> {{$popular->title}}</a></h4>
+                                                    <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true"></i>  {{date('j M Y', strtotime($trend->created_at))}}</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content">
-                                        <div class="item-post">
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-3 paddimg-right-none">
-                                                    <img src="images/popular/2.jpg" alt="" title="News image">
-                                                </div>
-                                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-9">
-                                                    <h4><a href="blog-single.html"> Pellentesque Odio Nisi<br /> Euismod In Pharet</a></h4>
-                                                    <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> June 28, 2017</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content">
-                                        <div class="item-post">
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-3 paddimg-right-none">
-                                                    <img src="images/popular/3.jpg" alt="" title="News image">
-                                                </div>
-                                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-9">
-                                                    <h4><a href="blog-single.html"> Erant Aeque Neius No <br />Numes Electram</a></h4>
-                                                    <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> June 28, 2017</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 content">
-                                        <div class="item-post">
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-3 paddimg-right-none">
-                                                    <img src="images/popular/4.jpg" alt="" title="News image">
-                                                </div>
-                                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-9">
-                                                    <h4><a href="blog-single.html"> Erant Aeque Neius No <br />Numes Electram</a></h4>
-                                                    <span class="date"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> June 28, 2017</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                                @endforeach
+                            @endif
                         </ul>
                     </div>
                     <!--popular Post End Here -->
@@ -871,311 +753,75 @@
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div id="news-Carousel" class="carousel carousel-news slide" data-ride="carousel">
-                                <!-- Wrapper for slides -->
-                                <!-- Left and right controls -->
-                                <div class="next-prev-top">
-                                    <div class="row">
-                                        <div class="col-sm-9 col-xs-9">
-                                            <div class="view-area">
-                                                <h3 class="title-bg">Health & LIFESTYLE</h3>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3 next-prev col-xs-3">
-                                            <a class="left news-control" href="index.html#news-Carousel" data-slide="prev">
-                                                <span class="news-arrow-left"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
-                                            </a>
-                                            <a class="right news-control" href="index.html#news-Carousel" data-slide="next">
-                                                <span class="news-arrow-right"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-inner">
-                                    <div class="item active">
-                                        <a href="index.html#"><img src="images/news-slider-image/1.jpg" alt="" title="#slider-direction-1" /></a>
-                                        <div class="dsc">
-                                                <span class="date">
-                                                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                                    November 28, 2017
-                                                </span>
-                                            <span class="comment">
-                                                    <a href="index.html#"> <i class="fa fa-comment-o" aria-hidden="true"></i> 50
-                                                    </a>
-                                                </span>
-                                            <h4><a href="blog-single.html"> Nam suscipit pretium consectetur. Proin tristique fermentum.</a></h4>
-                                            <p>Blandit rutrum, erat et egestas ultricies, dolor tortor egestas enim, quiste rhoncus sem the purus eu sapien curabitur.</p>
-                                        </div>
-                                    </div>
+                            {{--@foreach($statuses as $status)--}}
+                                {{--<div id="news-Carousel2" class="carousel carousel-news slide" data-ride="carousel">--}}
+                                    {{--<!-- Wrapper for slides -->--}}
+                                    {{--<!-- Left and right controls -->--}}
+                                    {{--<div class="next-prev-top">--}}
+                                        {{--<div class="row">--}}
+                                            {{--<div class="col-sm-9 col-xs-9">--}}
+                                                {{--<div class="view-area">--}}
+                                                    {{--<h3 class="title-bg">{{$status->name}}</h3>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
 
-                                    <div class="item">
-                                        <a href="index.html#"><img src="images/news-slider-image/3.jpg" alt="" title="#slider-direction-1" /></a>
-                                        <div class="dsc">
-                                                <span class="date">
-                                                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i> November 28, 2017
-                                                </span>
-                                            <span class="comment">
-                                                    <a href="index.html#"> <i class="fa fa-comment-o" aria-hidden="true"></i> 50
-                                                    </a>
-                                                </span>
-                                            <h4><a href="blog-single.html"> Nam suscipit pretium consectetur. Proin tristique fermentum.</a></h4>
-                                            <p>Blandit rutrum, erat et egestas ultricies, dolor tortor egestas enim, quiste rhoncus sem the purus eu sapien curabitur.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div id="news-Carousel2" class="carousel carousel-news slide" data-ride="carousel">
-                                <!-- Wrapper for slides -->
-                                <!-- Left and right controls -->
-                                <div class="next-prev-top">
-                                    <div class="row">
-                                        <div class="col-sm-9 col-xs-9">
-                                            <div class="view-area">
-                                                <h3 class="title-bg">Politics</h3>
-                                            </div>
-                                        </div>
+                                            {{--<div class="col-sm-3 col-xs-3 next-prev">--}}
+                                                {{--<a class="left news-control" href="#news-Carousel2" data-slide="prev">--}}
+                                                    {{--<span class="news-arrow-left"><i class="fa fa-angle-left" aria-hidden="true"></i></span>--}}
+                                                {{--</a>--}}
+                                                {{--<a class="right news-control" href="#news-Carousel2" data-slide="next">--}}
+                                                    {{--<span class="news-arrow-right"><i class="fa fa-angle-right" aria-hidden="true"></i></span>--}}
+                                                {{--</a>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="carousel-inner">--}}
+                                        {{--@foreach($status->posts as $post)--}}
+                                            {{--<div class="item active">--}}
+                                                {{--<a href="index.html#"><img src="images/news-slider-image/2.jpg" alt="" title="#slider-direction-1" /></a>--}}
+                                                {{--<div class="dsc">--}}
+                                                {{--<span class="date">--}}
+                                                    {{--<i class="fa fa-calendar-check-o" aria-hidden="true"></i>--}}
+                                                    {{--November 28, 2017--}}
+                                                {{--</span>--}}
+                                                    {{--<span class="comment">--}}
+                                                    {{--<a href="index.html#"> <i class="fa fa-comment-o" aria-hidden="true"></i> 50--}}
+                                                    {{--</a>--}}
+                                                {{--</span>--}}
+                                                    {{--<h4><a href="blog-single.html">{{$post->title}}</a></h4>--}}
+                                                    {{--<p>Blandit rutrum, erat et egestas ultricies, dolor tortor egestas enim, quiste rhoncus sem the purus eu sapien curabitur.</p>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
 
-                                        <div class="col-sm-3 col-xs-3 next-prev">
-                                            <a class="left news-control" href="index.html#news-Carousel2" data-slide="prev">
-                                                <span class="news-arrow-left"><i class="fa fa-angle-left" aria-hidden="true"></i></span>
-                                            </a>
-                                            <a class="right news-control" href="index.html#news-Carousel2" data-slide="next">
-                                                <span class="news-arrow-right"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-inner">
-                                    <div class="item active">
-                                        <a href="index.html#"><img src="images/news-slider-image/2.jpg" alt="" title="#slider-direction-1" /></a>
-                                        <div class="dsc">
-                                                <span class="date">
-                                                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                                    November 28, 2017
-                                                </span>
-                                            <span class="comment">
-                                                    <a href="index.html#"> <i class="fa fa-comment-o" aria-hidden="true"></i> 50
-                                                    </a>
-                                                </span>
-                                            <h4><a href="blog-single.html">Disabled people must be front and centre on TV – representation</a></h4>
-                                            <p>Blandit rutrum, erat et egestas ultricies, dolor tortor egestas enim, quiste rhoncus sem the purus eu sapien curabitur.</p>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <a href="index.html#"><img src="images/news-slider-image/4.jpg" alt="" title="#slider-direction-1" /></a>
-                                        <div class="dsc">
-                                                <span class="date">
-                                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                                November 28, 2017 </span>
-                                            <span class="comment">
-                                                <a href="index.html#"> <i class="fa fa-comment-o" aria-hidden="true"></i> 50
-                                                </a></span>
-                                            <h4><a href="blog-single.html">After Kim Briggs’s death, cyclists must realise that they are traffic too</a></h4>
-                                            <p>Blandit rutrum, erat et egestas ultricies, dolor tortor egestas enim, quiste rhoncus sem the purus eu sapien curabitur.</p>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <a href="index.html#"><img src="images/news-slider-image/2.jpg" alt="" title="#slider-direction-1" /></a>
-                                        <div class="dsc">
-                                                <span class="date">
-                                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                                November 28, 2017 </span>
-                                            <span class="comment">
-                                                <a href="index.html#"> <i class="fa fa-comment-o" aria-hidden="true"></i> 50
-                                                </a></span>
-                                            <h4><a href="blog-single.html">The new-style GCSEs show why politicians must do more explaining.</a></h4>
-                                            <p>Blandit rutrum, erat et egestas ultricies, dolor tortor egestas enim, quiste rhoncus sem the purus eu sapien curabitur.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                        {{--@endforeach--}}
+
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--@endforeach--}}
                         </div>
                     </div>
                     <!--End Two Slider -->
                     <!--Around Area Start Here -->
-                    <div class="view-area separator-large3">
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <h3 class="title-bg">Around the world</h3>
-                            </div>
-                            <div class="col-sm-4 text-right">
-                                <a href="index.html#">View More <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <ul class="news-post news-post2 around-news">
-                        <li>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 content">
-                                    <div class="item-post">
 
-                                        <div class="blog-image">
-                                            <a href="blog-single.html"><img src="images/world/5.jpg" alt="" title="News image" /></a>
-                                        </div>
-                                        <div class="content">
-                                           <span class="date">
-                                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                                November 28, 2017
-                                            </span>
-                                            <span class="comment">
-                                                <a href="index.html#"> <i class="fa fa-comment-o" aria-hidden="true"></i> 50
-                                                </a>
-                                            </span>
-                                            <h4><a href="blog-single.html">Clinton campaign jilted as FBI to search emails</a></h4>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestib vitae libero vel purus tincidunt aliquet at nec erat. Mauris the diam, ultrices quis leo sed lacinia egestas.The wise man there always holds in these matters.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 content">
-                                    <div class="item-post">
-                                        <div class="blog-image">
-                                            <a href="blog-single.html"><img src="images/world/6.jpg" alt="" title="News image" /></a>
-                                        </div>
-                                        <div class="content">
-                                            <span class="date">
-                                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                                November 28, 2017
-                                            </span>
-                                            <span class="comment">
-                                                <a href="index.html#"> <i class="fa fa-comment-o" aria-hidden="true"></i> 50
-                                                </a>
-                                            </span>
-                                            <h4><a href="blog-single.html">Clinton campaign jilted as FBI to search emails</a></h4>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestib vitae libero vel purus tincidunt aliquet at nec erat. Mauris the diam, ultrices quis leo sed lacinia egestas.The wise man there always holds in these matters.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="news-post news-post2 related">
-                        <li>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 content">
-                                    <div class="item-post">
-                                        <div class="row">
-                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 paddimg-right-none">
-                                                <a href="blog-single.html"><img src="images/world/1.jpg" alt="" title="News image" /></a>
-                                            </div>
-                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-9">
-                                                <h4><a href="blog-single.html">Pellentesque Odio Nisi Euismod In Pharet</a></h4>
-                                                <span class="date">
-                                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                                November 28, 2017
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 content">
-                                    <div class="item-post">
-                                        <div class="row">
-                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 paddimg-right-none">
-                                                <a href="blog-single.html"><img src="images/world/2.jpg" alt="" title="News image" /></a>
-                                            </div>
-                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-9">
-                                                <h4><a href="blog-single.html">prepare for Russian election</a></h4>
-                                                <span class="date">
-                                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                                June 28, 2017
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 content">
-                                    <div class="item-post">
-                                        <div class="row">
-                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 paddimg-right-none">
-                                                <a href="blog-single.html"><img src="images/world/3.jpg" alt="" title="News image" /></a>
-                                            </div>
-                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-9">
-                                                <h4><a href="blog-single.html"> Erant Aeque Neius No Numes Electram </a></h4>
-                                                <span class="date">
-                                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                                November 28, 2017
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 content">
-                                    <div class="item-post">
-                                        <div class="row">
-                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3 paddimg-right-none">
-                                                <a href="blog-single.html"><img src="images/world/4.jpg" alt="" title="News image" /></a>
-                                            </div>
-                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-9">
-                                                <h4><a href="blog-single.html">YouTube Acquire Twitch <br />For $1Billion</a></h4>
-                                                <span class="date">
-                                                <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                                                June 28, 2017
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 paddimg-left-none">
                     <h3 class="title-bg featured-title">Featured News</h3>
                     <div class="sidebar">
                         <ul>
-                            <li>
-                                <a href="index.html#" class="category-btn hvr-bounce-to-right">Business</a>
-                                <div class="post-image"><a href="blog-single.html"><img src="images/sidebar/1.jpg" alt="News image" /></a></div>
-                                <div class="content">
-                                    <h4><a href="blog-single.html">The exhibition Bankasy doesn’t want you to see</a></h4>
-                                    <span class="date">
-                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i> November 28, 2017
+                                @foreach($features  as $feature)
+                                    <li>
+                                        <a href="index.html#" class="category-btn hvr-bounce-to-right">{{$feature->category->name}}</a>
+                                        <div class="post-image"><a href="blog-single.html"><img src="{{asset('posts/'.$feature->images[0]->photo)}}" alt="News image" /></a></div>
+                                        <div class="content">
+                                            <h4><a href="blog-single.html">{{$feature->title}}</a></h4>
+                                            <span class="date">
+                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i> {{date('j M Y', strtotime($trend->created_at))}}
                                     </span>
-                                    <span class="comment">
-                                        <a href="index.html#">
-                                            <i class="fa fa-comment-o" aria-hidden="true"></i> 50
-                                        </a>
-                                    </span>
+                                        </div>
+                                    </li>
 
-                                </div>
-                            </li>
-                            <li>
-                                <a href="category-health.html" class="category-btn hvr-bounce-to-right">Health</a>
-                                <div class="post-image"><a href="blog-single.html"><img src="images/sidebar/2.jpg" alt="News image" /></a></div>
-                                <div class="content">
-                                    <h4><a href="index.html#">The exhibition Bankasy doesn’t want you to see</a></h4>
-                                    <span class="date">
-                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i> November 28, 2017
-                                    </span>
-                                    <span class="comment">
-                                        <a href="index.html#">
-                                            <i class="fa fa-comment-o" aria-hidden="true"></i> 50
-                                        </a>
-                                    </span>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="index.html#" class="category-btn hvr-bounce-to-right">Fashion</a>
-                                <div class="post-image"><a href="blog-single.html"><img src="images/sidebar/3.jpg" alt="News image" /></a></div>
-                                <div class="content">
-                                    <h4><a href="index.html#">The exhibition Bankasy doesn’t want you to see</a></h4>
-                                    <span class="date">
-                                        <i class="fa fa-calendar-check-o" aria-hidden="true"></i> November 28, 2017
-                                    </span>
-                                    <span class="comment">
-                                        <a href="index.html#">
-                                            <i class="fa fa-comment-o" aria-hidden="true"></i> 50
-                                        </a>
-                                    </span>
 
-                                </div>
-                            </li>
+                                @endforeach
                         </ul>
                         <div class="categories-home separator-large3">
                             <h3 class="title-bg">Categories</h3>

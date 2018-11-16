@@ -43,9 +43,10 @@ class AdminController extends Controller
     }
     public function postLogin(LoginRequest $request)
     {
-        if (Auth::attempt(['email' => $request->email,'password' => $request->password]))
+        if (Auth::attempt(['email' => $request->email,'password' => $request->password, 'role'=>1 ]))
         {
-            return redirect(route('dashboard'));
+
+           return redirect(route('dashboard'));
         }
         else {
             return back();

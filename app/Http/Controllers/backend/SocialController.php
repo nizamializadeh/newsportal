@@ -44,7 +44,8 @@ class SocialController extends Controller
         $slug = str_slug($request->link,'-');
         $request->merge(['slug' => $slug]);
         $socials->create($request->all());
-        $request->session()->flash(str_slug('Create socials','-'),'Socials created');
+
+        $request->session()->flash(str_slug('Create social','-'),'Social created');
         return back();
     }
 
@@ -68,7 +69,7 @@ class SocialController extends Controller
     public function edit(Socials $social)
     {
         $setting = $this->getSettingsForForm();
-        $setting['title'] = 'Edit socials';
+        $setting['title'] = 'Edit social';
         return view('backend.socials.edit',compact('social','setting'));
     }
 
@@ -85,6 +86,7 @@ class SocialController extends Controller
         $request->merge(['slug' => $slug]);
         $social->update($request->all());
         $request->session()->flash(str_slug('Edit social','-'),'Social edited');
+
         return back();
     }
 
@@ -99,7 +101,7 @@ class SocialController extends Controller
     public function destroy(Request $request,Socials $social)
     {
         $social->delete();
-        $request->session()->flash(str_slug('Socilas','-'),'Social Deleted');
+        $request->session()->flash(str_slug('Socials','-'),'Social Deleted');
         return back();
     }
 

@@ -14,7 +14,7 @@
             <div class="btn-group user-helper-dropdown">
                 <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                 <ul class="dropdown-menu pull-right">
-                    <li><a href="/profil/edit"><i class="material-icons">person</i>Profile</a></li>
+                    <li><a href="/profil/edit/{{Auth::user()->id}}"><i class="material-icons">person</i>Profile</a></li>
 
                     <li>
                         <a  href="{{ route('logout') }}"
@@ -77,8 +77,8 @@
                         <li class="{{request()->routeIs('testimonail.index') ? 'active' : ''}}">
                             <a href="{{route('testimonail.index')}}">Testimonail</a>
                         </li>
-                        <li class="{{request()->routeIs('testimonail.index') ? 'active' : ''}}">
-                            <a href="{{route('testimonail.index')}}">Author</a>
+                        <li class="{{request()->routeIs('acceptauthor.index') ? 'active' : ''}}">
+                            <a href="{{route('acceptauthor.index')}}">Author</a>
                         </li>
                     </ul>
                 </li>

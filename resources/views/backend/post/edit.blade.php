@@ -4,8 +4,8 @@
 
         <div class="col-sm-6">
             <div class="form-group form-float">
-                    <div class="col-sm-6" style="height:90px">
-                    <img class="img-responsive thumbnail post-img-preview" src="{{asset('posts/'.$image->photo)}}">
+                    <div class="col-sm-6">
+                    <img  style="max-height:250px" class="img-responsive thumbnail post-img-preview" src="{{asset('posts/'.$image->photo)}}">
                     </div>
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
@@ -59,9 +59,49 @@
             <div class="col-sm-6">
                 <div class="form-group form-float">
                     <div class="form-line">
-                        <input name="que" type="text" required class="form-control" value="{{$post->que}}">
-                        <label class="form-label">Number</label>
+                        <select name="trend" class=" show-tick" data-selected-text-format="count">
+
+                                <option {{($post->trend ==1) ? "selected" : ""}} value="1"> de Aktive</option>
+                                <option {{($post->trend ==0) ? "selected" : ""}} value="0">  Aktive</option>
+                        </select>
                     </div>
+                    <label class="form-label">Trend</label>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <select name="head" class=" show-tick" data-selected-text-format="count">
+
+                                <option {{($post->head ==1) ? "selected" : ""}} value="1"> de Aktive</option>
+                                <option {{($post->head ==0) ? "selected" : ""}} value="0">  Aktive</option>
+                        </select>
+                    </div>
+                    <label class="form-label">Head</label>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <select name="break" class=" show-tick" data-selected-text-format="count">
+
+                                <option {{($post->break ==1) ? "selected" : ""}} value="1"> de Aktive</option>
+                                <option {{($post->break ==0) ? "selected" : ""}} value="0">  Aktive</option>
+                        </select>
+                    </div>
+                    <label class="form-label">Break</label>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group form-float">
+                    <div class="form-line">
+                        <select name="feature" class=" show-tick" data-selected-text-format="count">
+
+                                <option {{($post->feature ==1) ? "selected" : ""}} value="1"> de Aktive</option>
+                                <option {{($post->feature ==0) ? "selected" : ""}} value="0">  Aktive</option>
+                        </select>
+                    </div>
+                    <label class="form-label">Feature</label>
                 </div>
             </div>
             <div class="col-sm-3">
@@ -73,6 +113,8 @@
                             @endforeach
                         </select>
                     </div>
+                    <label class="form-label">Category</label>
+
                 </div>
             </div>
             <div class="col-sm-3">
@@ -84,6 +126,7 @@
                             @endforeach
                         </select>
                     </div>
+                    <label class="form-label">Tag</label>
                 </div>
             </div>
             <div class="col-sm-12">
@@ -94,12 +137,11 @@
                 </div>
             </div>
             <div class="col-sm-12">
-                <h2 class="card-inside-title">Status</h2>
                 <div class="demo-switch">
-                    <div class="switch">
-                        <label>Deactive<input type="checkbox" name="status" checked="1"><span class="lever"></span>Active</label>
+                    <div class="switch hide">
+                        <label><input class="statusCheckBox" data-row="{{$post->id}}" type="checkbox" {{($post->status) ? 'checked' : ""}}><span class="lever"></span></label>
                     </div>
-                    <button type="submit" class="btn btn-success waves-effect right">Create category</button>
+                    <button type="submit" class="btn btn-success waves-effect right">Edit post</button>
                 </div>
             </div>
         </div>

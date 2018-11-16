@@ -74,10 +74,8 @@ class ContactController extends Controller
      * @param Category $category
      * @return \Illuminate\Http\Response
      */
-    public function update(ContactRequest $request, Contact $contact)
+    public function update(Request $request, Contact $contact)
     {
-        $slug = str_slug($request->text,'-');
-        $request->merge(['text' => $slug]);
         $contact->update($request->all());
         $request->session()->flash(str_slug('Edit contact','-'),'Contact edited');
         return back();
@@ -114,19 +112,7 @@ class ContactController extends Controller
                     'label' => 'ID',
                 ],
                 [
-                    'label' => 'Text',
-                ],
-                [
-                    'label' => 'Adress',
-                ],
-                [
-                    'label' => 'Phone',
-                ],
-                [
                     'label' => 'Email',
-                ],
-                [
-                    'label' => 'Map',
                 ]
             ],
         ];

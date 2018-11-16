@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Auth::routes();
 
@@ -24,18 +24,21 @@ Route::post('set-status','backend\AdminController@setStatus')->name('setStatus')
 Route::get('/admin/login', 'backend\AdminController@login')->name('adminLogin');
 Route::post('/admin/login', 'backend\AdminController@postLogin')->name('postAdminLogin');
 
-Route::get('/s','frontend\SiteController@index')->name('site');
+Route::get('/author/login', 'backend\AuthorController@login')->name('authorLogin');
+Route::post('/author/login', 'backend\AuthorController@postLogin')->name('postAuthorLogin');
+
+Route::get('/','frontend\SiteController@index')->name('site');
 Route::get('/abouts','frontend\SiteController@about')->name('about');
 Route::get('/testimonail','frontend\SiteController@testimonail')->name('testimonail');
 Route::get('/contact','frontend\SiteController@contact')->name('contact');
 Route::post('/contactus','frontend\SiteController@contactus')->name('contactus');
+Route::get('/post/{slug}','frontend\SiteController@postSingle')->name('postSingle');
+
 
 Route::group(['middleware' => 'admin','prefix' => 'admin'],function (){
     Route::get('dashboard','backend\AdminController@dashboard')->name('dashboard');
     Route::get('contact-us','backend\AdminController@contactus')->name('contactus');
-
     Route::resources([
-
         'abouts' => 'backend\AboutController',
         'category' => 'backend\CategoryController',
         'contact' => 'backend\ContactController',
@@ -45,14 +48,19 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'],function (){
         'testimonail' => 'backend\TestimonailsController',
         'user' => 'backend\UserController',
         'image' => 'backend\ImageController',
-
+        'post' => 'backend\PostController',
+        'acceptauthor' => 'backend\AcceptAuthorController',
     ]);
 });
-
-Route::resources([
-    'post' => 'backend\PostController',
-]);
-Route::get('/profil/edit','backend\UserController@edit')->name('edit');
-Route::post('/profil/update','backend\UserController@update')->name('update');
-
-
+Route::group(['middleware' => 'author','prefix' => 'user'],function (){
+    Route::group(['middleware' => 'AcceptAuthor','prefix' => 'author'],function (){
+        Route::resources([
+            'authorpost' => 'backend\AuthorPostController',
+        ]);
+    });
+    Route::resources([
+        'test' => 'backend\AuthorController',
+    ]);
+});
+Route::get('/profil/edit/{id}','backend\UserController@edit')->name('edit');
+Route::post('/profil/update/{id}','backend\UserController@update')->name('update');

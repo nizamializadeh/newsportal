@@ -1,13 +1,13 @@
 @component('backend.components.form',$setting)
     {{-- Component content--}}
-    <form id="form_validation" action="{{route('category.update',['category' => $category->id])}}" method="post">
+    <form id="form_validation" action="{{route('category.update',['category' => $categories->id])}}" method="post">
         {{method_field('PUT')}}
         @csrf
         <div class="row clearfix">
             <div class="col-sm-6">
                 <div class="form-group form-float">
                     <div class="form-line">
-                        <input name="name" type="text" required class="form-control" value="{{$category->name}}">
+                        <input name="name" type="text" required class="form-control" value="{{$categories->name}}">
                         <label class="form-label">Name</label>
                     </div>
                 </div>
@@ -23,14 +23,25 @@
                 </div>
             </div>
             <div class="col-sm-12">
-                <h2 class="card-inside-title">Status</h2>
                 <div class="demo-switch">
-                    <div class="switch">
-                        <label>Deactive<input type="checkbox" name="status" {{($category->status) ? 'checked' : ''}}><span class="lever"></span>Active</label>
+                    <div class="switch hide">
+                        <label>Deactive<input type="checkbox" name="status" {{($categories->status) ? 'checked' : ''}}><span class="lever"></span>Active</label>
                     </div>
                     <button type="submit" class="btn btn-success waves-effect right">Edit category</button>
                 </div>
             </div>
+            <div class="col-sm-3">
+                <div class="input-group ">
+                    <div class="form-line">
+                        <select name="parent_id" class=" show-tick" data-live-search="true">
+                            @foreach($categories as $category)
+                                {{$category->name}}
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </form>
 @endcomponent

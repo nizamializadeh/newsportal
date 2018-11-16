@@ -3,11 +3,7 @@
     @foreach($contacts as $contact)
         <tr>
             <td>{{$contact->id}}</td>
-            <td>{{$contact->text}}</td>
-            <td>{{$contact->adress}}</td>
-            <td>{{$contact->phone}}</td>
             <td>{{$contact->email}}</td>
-            <td>{{$contact->map}}</td>
             <td>
                 <form action="{{route('contact.destroy',['contact' => $contact->id])}}" method="post">
                     {{ method_field('delete') }}

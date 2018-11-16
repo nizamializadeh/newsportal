@@ -11,6 +11,19 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <div class="form-line">
+                        <select name="parent_id" class=" show-tick"  data-selected-text-format="count">
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
+                        </select>
+                        <label class="last">category</label>
+
+                    </div>
+                </div>
+            </div>
             <div class="col-sm-6">
                 <div class="input-group hidden colorpicker colorpicker-element">
                     <div class="form-line">
@@ -22,11 +35,7 @@
                 </div>
             </div>
             <div class="col-sm-12">
-                <h2 class="card-inside-title">Status</h2>
                 <div class="demo-switch">
-                    <div class="switch">
-                        <label>Deactive<input type="checkbox" name="status" checked="1"><span class="lever"></span>Active</label>
-                    </div>
                     <button type="submit" class="btn btn-success waves-effect right">Create category</button>
                 </div>
             </div>

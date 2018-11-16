@@ -39,7 +39,7 @@ class TestimonailsController extends Controller
             $image->save(public_path('testimonails/'.$orginalImageName));
             $request->merge(['image' => $orginalImageName]);
             $request->merge(['slug' => str_slug($request->name,'-')]);
-            $request->session()->flash(str_slug('Create post','-'),'Post created');
+            $request->session()->flash(str_slug('Create testimonail','-'),'Testimonail created');
         }
         $testimonail->create($request->all());
         return back();
@@ -80,6 +80,8 @@ class TestimonailsController extends Controller
     {
         $testimonail->delete();
         $request->session()->flash(str_slug('Testimonails','-'),'Testimonail Deleted');
+
+
         return back();
     }
     private function getSettingsForTable()

@@ -17,7 +17,7 @@ class CreateMainsTable extends Migration
             $table->increments('id');
             $table->string('logo');
             $table->string('site_title');
-            $table->string('site_desc');
+            $table->text('site_desc');
             $table->string('site_share_img');
             $table->string('singe_page_img');
             $table->timestamps();

@@ -13,9 +13,9 @@
 
                         </div>
                         <div class="body">
-                            <form action=" {{route('profil.update'}}"   method="post" enctype="multipart/form-data" >
+                            <form action="{{url('/profil/update/'.$user->id)}}"   method="post" enctype="multipart/form-data" >
                                 {{ method_field('PUT') }}
-                                @csrfp
+                                @csrf
                                 <div class="form-group form-float">
                                     <div class="form-line">
                                         <input type="text" name="name" id="name" class="form-control" value="{{Auth::user()->name}}">

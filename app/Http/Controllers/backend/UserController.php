@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function edit(User $user)
+    public function edit($id)
     {
-
-        return view('backend.user.edit', compact('s'));
+        $user=User::findorFail($id);
+        return view('backend.user.edit', compact('user'));
     }
     /**
      * Update the specified resource in storage.
@@ -21,25 +21,28 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, User $user)
     {
-
-        $user= Auth::user();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        if ($request->password!=null)
+        dd($user);
+        if ($user->id==Auth::user()->id)
         {
-            $user->password =  bcrypt($request->password);
+            $user->name = $request->name;
+            $user->email = $request->email;
+            if ($request->password!=null)
+            {
+                $user->password =  bcrypt($request->password);
+            }
+
+            if ($request->hasFile('file')){
+                $name = time().".".$request->file("file")->extension();
+                $user->image = $name;
+
+                $request->file("file")->move(public_path().'/images/', $name);
+            }
+
+            $user->save();
         }
 
-        if ($request->hasFile('file')){
-            $name = time().".".$request->file("file")->extension();
-            $user->image = $name;
-
-            $request->file("file")->move(public_path().'/images/', $name);
-        }
-
-        $user->save();
         return redirect(route('dashboard'));
 
     }

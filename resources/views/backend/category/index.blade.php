@@ -6,7 +6,7 @@
             <td>{{$category->name}}</td>
             <td>
                 <div class="switch">
-                    <label><input class="statusCheckBox" type="checkbox" {{($category->status) ? 'checked' : ""}}><span class="lever"></span></label>
+                    <label><input class="statusCheckBox" data-row="{{$category->id}}" type="checkbox" {{($category->status) ? 'checked' : ""}}><span class="lever"></span></label>
                 </div>
             </td>
             <td>

@@ -33,7 +33,6 @@ class AboutController extends Controller
     {
         if ($request->hasFile('photo'))
         {
-            (file_exists(public_path('about/'.$about->image)) ? unlink(public_path('about/'.$about->image)) : null);
             $image = Image::make($request->file('photo'));
             $orginalImageName = str_slug($request->text,'-').'.'.$request->file('photo')->getClientOriginalExtension();
 //            $tumbnailImageName = "thumbnail-".str_slug($request->text,'-').'.'.$request->file('photo')->getClientOriginalExtension();
@@ -60,12 +59,6 @@ class AboutController extends Controller
             'columns' => [
                 [
                     'label' => 'ID',
-                ],
-                [
-                    'label' => 'Title',
-                ],
-                [
-                    'label' => 'Image',
                 ],
                 [
                     'label' => 'Text',

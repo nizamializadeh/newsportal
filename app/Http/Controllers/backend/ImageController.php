@@ -79,10 +79,10 @@ class ImageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Image $image)
+    public function destroy(Request $request,Image $image)
     {
         $image->delete();
-        $image->session()->flash(str_slug('images','-'),'Image Deleted');
-        return redirect('/s');
+        $request->session()->flash(str_slug('images','-'),'Image Deleted');
+        return back();
     }
 }

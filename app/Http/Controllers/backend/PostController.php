@@ -51,21 +51,14 @@ class PostController extends Controller
      */
     public function store(Request $request,Post $post)
     {
-//        if ($request->hasFile('photo'))
-//        {
-//            $image = Image::make($request->file('photo'));
-//            $orginalImageName = str_slug($request->title,'-').'.'.$request->file('photo')->getClientOriginalExtension();
-//            $tumbnailImageName = "thumbnail-".str_slug($request->title,'-').'.'.$request->file('photo')->getClientOriginalExtension();
-//            $image->save(public_path('post/'.$orginalImageName));
-//            $image->resize(600, null, function ($constraint) {
-//                $constraint->aspectRatio();
-//            });
-//            $image->save(public_path('post/'.$tumbnailImageName));
-//            $request->merge(['image' => $orginalImageName]);
-//
-//        }
+        $request->merge(['que' => 1]);
         $request->merge(['count' => 0]);
+        $request->merge(['time' => 0]);
         $request->merge(['status' => 0]);
+        $request->merge(['break' => 0]);
+        $request->merge(['trend' => 0]);
+        $request->merge(['head' => 0]);
+        $request->merge(['feature' => 0]);
         $request->merge(['user_id' => Auth::id()]);
         $request->merge(['slug' => str_slug($request->title,'-')]);
         $request->session()->flash(str_slug('Create post','-'),'Post created');
@@ -135,7 +128,6 @@ class PostController extends Controller
             }
         }
         $request->merge(['count' => 0]);
-        $request->merge(['status' => 0]);
         $request->merge(['slug' => str_slug($request->title,'-')]);
         $post->update($request->all());
         $post->tags()->sync($request->tags);

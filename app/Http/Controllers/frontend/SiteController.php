@@ -8,24 +8,44 @@ use App\Modles\Contact;
 use App\Modles\ContactForum;
 use App\Modles\Post;
 use App\Modles\Testimonail;
+use DemeterChain\C;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class SiteController extends Controller
 {
     public function index ()
     {
-        $posts = Post::orderBy('id', 'DESC')->take(8)->get();
-        $posts=$posts->chunk(5);
-        $categories=Category::whereSatatus(1);
-        $trend= Post::orderBy('id', 'DESC')->take(4)->get();
+        $breaks = Post::orderBy('id', 'DESC')->where('break', '=', 0)->get();
+        $trends = Post::where('trend', '=', 0)->orderBy('id', 'DESC')->take(5)->get();
+        $heads = Post::where('head', '=', 0)->orderBy('id', 'DESC')->take(4)->get();
+        $features = Post::orderBy('id', 'DESC')->take(3)->get();
+        $statuses =Category::where('status', '=', 1)->get();
+        $latests= Post::orderBy('id', 'DESC')->take(5)->get();
+        $latests=$latests->chunk(4);
+        $populars= Post::orderBy('count', 'DESC')->take(5)->get();
+        $populars=$populars->chunk(4);
+        $trends=$trends->chunk(4);
+        $heads=$heads->chunk(3);
+        return view('frontend.index',compact('breaks','trends','heads','features','latests','populars','statuses'));
+    }
+    public function postSingle ($slug)
+    {
+        $post = Post::where([['status', 1],['slug' , $slug]])->first();
+        if (isset($post))
+        {
+            $post->count = $post->count + 1;
+            $post->save();
+            $popularPost = Post::where('status', 1)->orderBy('count','DESC')->take(6)->get();
 
 
-
-
-
-        return view('frontend.index',compact('posts','trend_post'));
-
+            return view('frontend.post_single',compact('post','popularPost'));
+        }
+        else
+        {
+            return view('errors.404');
+        }
     }
     public function about ()
     {

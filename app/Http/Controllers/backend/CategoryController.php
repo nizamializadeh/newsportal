@@ -28,8 +28,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $categories = Category::all();
         $setting = $this->getSettingsForForm();
-        return view('backend.category.create',compact('setting'));
+        return view('backend.category.create',compact('setting','categories'));
     }
 
     /**
@@ -43,6 +44,7 @@ class CategoryController extends Controller
     {
         $slug = str_slug($request->name,'-');
         $request->merge(['slug' => $slug]);
+        $request->merge(['status' => 0]);
         $category->create($request->all());
         $request->session()->flash(str_slug('Create category','-'),'Category created');
         return back();
@@ -68,9 +70,10 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        $categories = Category::all();
         $setting = $this->getSettingsForForm();
         $setting['title'] = 'Edit category';
-        return view('backend.category.edit',compact('category','setting'));
+        return view('backend.category.edit',compact('categories','setting'));
     }
 
     /**

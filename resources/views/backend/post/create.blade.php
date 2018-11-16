@@ -23,13 +23,6 @@
                         <label class="form-label">Title</label>
                     </div>
                 </div>
-            </div><div class="col-sm-6">
-                <div class="form-group form-float">
-                    <div class="form-line">
-                        <input name="time" type="text" required class="form-control">
-                        <label class="form-label">time</label>
-                    </div>
-                </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group form-float">
@@ -44,14 +37,6 @@
                     <div class="form-line">
                         <input name="keyword" type="text" required class="form-control">
                         <label class="form-label">Keyword</label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group form-float">
-                    <div class="form-line">
-                        <input name="que" type="text" required class="form-control">
-                        <label class="form-label">Number</label>
                     </div>
                 </div>
             </div>
@@ -77,19 +62,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3">
-                <div class="input-group">
-                    <div class="form-line">
-                        <select name="type" class=" show-tick">
-                            <option value="0">Normal</option>
-                            <option value="1"> Editor picks</option>
-                            <option value="2">Recommended</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-
             <div class="col-sm-12">
                 <div class="form-group form-float">
                     <div class="form-line">
@@ -98,12 +70,8 @@
                 </div>
             </div>
             <div class="col-sm-12">
-                <h2 class="card-inside-title">Status</h2>
                 <div class="demo-switch">
-                    <div class="switch">
-                        <label>Deactive<input type="checkbox" name="status" checked="1"><span class="lever"></span>Active</label>
-                    </div>
-                    <button type="submit" class="btn btn-success waves-effect right">Create category</button>
+                    <button type="submit" class="btn btn-success waves-effect right">Create post</button>
                 </div>
             </div>
         </div>

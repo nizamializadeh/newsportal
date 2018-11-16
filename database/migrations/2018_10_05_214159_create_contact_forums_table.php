@@ -19,7 +19,7 @@ class CreateContactForumsTable extends Migration
             $table->string('surname');
             $table->string('email');
             $table->string('phone');
-            $table->string('message');
+            $table->text('message');
             $table->timestamps();
         });
     }
